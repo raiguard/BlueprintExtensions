@@ -17,6 +17,8 @@ local function icon(s, x, y)
     }
 end
 
+local add_shortcuts = settings.startup["BlueprintExtensions_add-shortcuts"].value
+
 for name, action in pairs(actions) do
     if action.key_sequence then
         data:extend{ {
@@ -32,23 +34,26 @@ for name, action in pairs(actions) do
         sprite.type = "sprite"
         sprite.name = name
 
-        data:extend {
-            sprite,
-            {
-                name = name,
-                type = "shortcut",
-                localised_name = { "controls." .. name },
-                associated_control_input = (action.key_sequence and name or nil),
-                action = "lua",
-                toggleable = action.toggleable or false,
-                icon = icon(32, action.icon, 1),
-                disabled_icon = icon(32, action.icon, 0),
-                small_icon = icon(24, action.icon, 1),
-                disabled_small_icon = icon(24, action.icon, 0),
-                style = action.shortcut_style,
-                order = "b[blueprints]-x[bpex]-" .. action.order
+        data:extend{sprite}
+
+        if add_shortcuts then
+            data:extend{
+                {
+                    name = name,
+                    type = "shortcut",
+                    localised_name = { "controls." .. name },
+                    associated_control_input = (action.key_sequence and name or nil),
+                    action = "lua",
+                    toggleable = action.toggleable or false,
+                    icon = icon(32, action.icon, 1),
+                    disabled_icon = icon(32, action.icon, 0),
+                    small_icon = icon(24, action.icon, 1),
+                    disabled_small_icon = icon(24, action.icon, 0),
+                    style = action.shortcut_style,
+                    order = "b[blueprints]-x[bpex]-" .. action.order
+                }
             }
-        }
+        end
     end
 end
 

@@ -1,5 +1,12 @@
 data:extend{
     {
+        type = "bool-setting",
+        name = "BlueprintExtensions_add-shortcuts",
+        setting_type = "startup",
+        order = 100,
+        default_value = true
+    },
+    {
         type = "string-setting",
         name = "BlueprintExtensions_version-increment",
         setting_type = "runtime-per-user",
@@ -85,7 +92,7 @@ data:extend{
         setting_type = "runtime-per-user",
         order = 504,
         default_value = true,
-    },
+    }
 }
 
 

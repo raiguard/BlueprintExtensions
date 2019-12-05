@@ -68,9 +68,11 @@ function GUI.update_visibility(player, force)
         flow.visible = enabled
     end
 
-    for name, action in pairs(actions) do
-        if action.icon then
-            player.set_shortcut_available(name, enabled)
+    if settings.startup["BlueprintExtensions_add-shortcuts"].value then
+        for name, action in pairs(actions) do
+            if action.icon then
+                player.set_shortcut_available(name, enabled)
+            end
         end
     end
 
